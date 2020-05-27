@@ -97,10 +97,10 @@ const Main = () =>{
     }
 
     return (
-        <div>
+        <div className="main">
             <h1>Conway's Game of Life</h1>
             <div className="buttons_container">
-                <button onClick={() => startButton()}>Start/Stop</button>
+                <button onClick={() => startButton()}>{run ? "Stop" : "Start"}</button>
                 {/* <button onClick={() => stopButton()}>Stop</button> */}
                 <button onClick={() => nextButton()}>Next Generation</button>
                 <button onClick={()=> seed()}>Randomize</button>
