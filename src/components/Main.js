@@ -1,53 +1,80 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useEffect} from 'react';
+import {DoublyLinkedList} from '../data_structures/doubly_linked_list'
 import Grid from "./Grid"
+
 
 const Main = () =>{
     const height = Math.floor((getWindowDimensions().height / 30))
     const width = Math.floor((getWindowDimensions().width / 25))
-
+    
+    const initialDll = new DoublyLinkedList()
+    for(let i = 0; i < height*width; i++){
+        initialDll.push(false)
+    }
+    
     const [rows, setRows] = useState(height)
     const [cols, setCols] = useState(width)
     const [speed, setSpeed] = useState(1)
     const [generation, setGeneration] = useState(0)
     const [intervalId, setIntervalId] = useState()
     const [run, setRun] = useState(false)
-    const [gridFull, setGridFull] = useState(Array(rows).fill().map(() => Array(cols).fill(false)))
+    const [dll, setDll] = useState(initialDll)
 
     useEffect(()=>{
-        let gridCopy = arrayClone(gridFull);
+        let newDll = new DoublyLinkedList()
 
-        for (let i = 0; i < rows; i++) {
-            for (let j = 0; j < cols; j++) {
-                let count = 0
+        for(let i = 0; i < dll.length; i++){
+            let currentNode = dll.getNodeAtIndex(i)
+            let count = 0;
+            // left
+            if(dll.getNodeAtIndex(i-1).value) count++;
 
-                // count cells around each cell
-                if (i > 0) if (gridFull[i - 1][j]) count++;
-                if (i > 0 && j > 0) if (gridFull[i - 1][j - 1]) count++;
-                if (i > 0 && j < cols - 1) if (gridFull[i - 1][j + 1]) count++;
-                if (j < cols - 1) if (gridFull[i][j + 1]) count++;
-                if (j > 0) if (gridFull[i][j - 1]) count++;
-                if (i < rows - 1) if (gridFull[i + 1][j]) count++;
-                if (i < rows - 1 && j > 0) if (gridFull[i + 1][j - 1]) count++;
-                if (i < rows - 1 && j < cols - 1) if (gridFull[i + 1][j + 1]) count++;
+            // right
+            if(dll.getNodeAtIndex(i+1).value) count++;
 
-                // rules
-                if (count < 2 || count > 3){
-                    gridCopy[i][j] = false
-                }
-                if (count === 3){
-                    gridCopy[i][j] = true
-                }
+            // above
+            if(dll.getNodeAtIndex(i-cols).value) count++
+
+            // below
+            if(dll.getNodeAtIndex(i+cols).value) count++;
+
+            // upper left
+            if(dll.getNodeAtIndex((i-cols)-1).value) count++;
+
+            // upper right
+            if(dll.getNodeAtIndex((i-cols)+1).value) count++;
+
+            // lower left
+            if(dll.getNodeAtIndex((i+cols)-1).value) count++;
+
+            // lower right
+            if(dll.getNodeAtIndex((i+cols)+1).value) count++;
+
+            if (count < 2 || count > 3){
+                newDll.push(false)
             }
+            if (count === 3){
+                newDll.push(true)
+            }
+            if (count === 2){
+                newDll.push(currentNode.value)
+            }
+        
         }
-        setGridFull(gridCopy)
+        setDll(newDll)
 
     }, [generation])
 
-    const selectBox = (row, col) => {
+    const selectBox = (index) => {
         if (!run){
-            let gridCopy = arrayClone(gridFull)
-            gridCopy[row][col] = !gridCopy[row][col]
-            setGridFull(gridCopy)
+            let newDll = new DoublyLinkedList()
+            let node = dll.getNodeAtIndex(index)
+            node.value = !node.value
+            for(let i = 0; i < dll.length; i++){
+                newDll.push(dll.getNodeAtIndex(i).value)
+            }
+            
+            setDll(newDll)
         }
     }
     
@@ -75,22 +102,20 @@ const Main = () =>{
     }
 
     const seed = (number=30) => {
-        let gridCopy = arrayClone(gridFull)
-
-        for(let i = 0; i < rows; i++){
-            for (let j = 0; j < cols; j++){
-                gridCopy[i][j] = false
-                if (Math.floor(Math.random() * 1/number*100) === 0){
-                    gridCopy[i][j] = true
-                }
-
+        let newDll = new DoublyLinkedList()
+        for(let i = 0; i < dll.length; i++){
+            if (Math.floor(Math.random() * 1/number*100) === 0){
+                newDll.push(true)
+            }
+            else {
+                newDll.push(false)
             }
         }
-        setGridFull(gridCopy)
+        setDll(newDll)
     }
 
     const reset = () => {
-        setGridFull(Array(rows).fill().map(() => Array(cols).fill(false)))
+        setDll(initialDll)
         setGeneration(0)
         clearInterval(intervalId)
     }
@@ -114,17 +139,13 @@ const Main = () =>{
                 <button onClick={()=> seed()}>Randomize</button>
                 <button onClick={() => reset()}>Reset</button>
             </div>
-            <Grid gridFull={gridFull} rows={rows} cols={cols} selectBox={selectBox}/>
+            <Grid dll={dll} rows={rows} cols={cols} selectBox={selectBox}/>
             <h2>Generations: {generation}</h2>
         </div>
     )
 }
 
 export default Main
-
-function arrayClone(arr){
-    return JSON.parse(JSON.stringify(arr))
-}
 
 function getWindowDimensions() {
     const { innerWidth: width, innerHeight: height } = window;

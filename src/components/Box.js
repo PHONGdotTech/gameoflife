@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Box(props){
     const selectBox = () => {
-        props.selectBox(props.row, props.col)
+        props.selectBox(props.index)
     }
 
     let bgColor = "b9b9b9"
@@ -11,7 +11,7 @@ export default function Box(props){
     }
         
     return(
-        <div className={props.boxClass} id={props.id} onClick={selectBox}>
+        <div className={props.boxClass} index={props.index} onClick={selectBox}>
 
         </div>
     )
