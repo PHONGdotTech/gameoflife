@@ -11,7 +11,7 @@ export default function Box(props){
     }
         
     return(
-        <div className={props.boxClass} id={props.id} onClick={selectBox} style={{backgroundColor: "#"+bgColor}}>
+        <div className={props.boxClass} id={props.id} onClick={selectBox}>
 
         </div>
     )

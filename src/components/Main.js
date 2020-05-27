@@ -100,7 +100,16 @@ const Main = () =>{
         <div className="main">
             <h1>Conway's Game of Life</h1>
             <div className="buttons_container">
-                <button onClick={() => startButton()}>{run ? "Stop" : "Start"}</button>
+                <button 
+                    onClick={() => startButton()} 
+                    style={
+                        run ?
+                            {color: "red", border: "red 1px solid"}:
+                        {color: "green", border: "green 1px solid"}
+                    }
+                >
+                    {run ? "Stop" : "Start"}
+                </button>
                 {/* <button onClick={() => stopButton()}>Stop</button> */}
                 <button onClick={() => nextButton()}>Next Generation</button>
                 <button onClick={()=> seed()}>Randomize</button>
