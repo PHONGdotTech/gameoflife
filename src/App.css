@@ -36,3 +36,34 @@
     transform: rotate(360deg);
   }
 }
+
+.grid{
+  width: 400px;
+  display: flex;
+  flex-wrap: wrap;
+  border: solid black 1px;
+  border-bottom: solid black 2px;
+  border-left: solid black 2px;
+  margin: auto;
+  margin-top: 20px;
+}
+
+.box{
+  border: solid gray 1px;
+  width: 15px;
+  height: 15px;
+  margin-left: -1px;
+  margin-bottom: -1px;
+}
+
+.box:hover{
+  background-color: lightgreen
+}
+
+.on{
+  background-color: green;
+}
+
+.off{
+  background-color: silver;
+}
