@@ -44,9 +44,11 @@ const Main = () =>{
     }, [generation])
 
     const selectBox = (row, col) => {
-        let gridCopy = arrayClone(gridFull)
-        gridCopy[row][col] = !gridCopy[row][col]
-        setGridFull(gridCopy)
+        if (!run){
+            let gridCopy = arrayClone(gridFull)
+            gridCopy[row][col] = !gridCopy[row][col]
+            setGridFull(gridCopy)
+        }
     }
     
     const startButton = () => {
