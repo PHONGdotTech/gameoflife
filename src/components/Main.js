@@ -14,7 +14,6 @@ const Main = () =>{
     const [gridFull, setGridFull] = useState(Array(rows).fill().map(() => Array(cols).fill(false)))
 
     useEffect(()=>{
-        let grid = gridFull;
         let gridCopy = arrayClone(gridFull);
 
         for (let i = 0; i < rows; i++) {
