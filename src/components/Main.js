@@ -22,14 +22,14 @@ const Main = () =>{
                 let count = 0
 
                 // count cells around each cell
-                if (i > 0) if (grid[i - 1][j]) count++;
-                if (i > 0 && j > 0) if (grid[i - 1][j - 1]) count++;
-                if (i > 0 && j < cols - 1) if (grid[i - 1][j + 1]) count++;
-                if (j < cols - 1) if (grid[i][j + 1]) count++;
-                if (j > 0) if (grid[i][j - 1]) count++;
-                if (i < rows - 1) if (grid[i + 1][j]) count++;
-                if (i < rows - 1 && j > 0) if (grid[i + 1][j - 1]) count++;
-                if (i < rows - 1 && j < cols - 1) if (grid[i + 1][j + 1]) count++;
+                if (i > 0) if (gridFull[i - 1][j]) count++;
+                if (i > 0 && j > 0) if (gridFull[i - 1][j - 1]) count++;
+                if (i > 0 && j < cols - 1) if (gridFull[i - 1][j + 1]) count++;
+                if (j < cols - 1) if (gridFull[i][j + 1]) count++;
+                if (j > 0) if (gridFull[i][j - 1]) count++;
+                if (i < rows - 1) if (gridFull[i + 1][j]) count++;
+                if (i < rows - 1 && j > 0) if (gridFull[i + 1][j - 1]) count++;
+                if (i < rows - 1 && j < cols - 1) if (gridFull[i + 1][j + 1]) count++;
 
                 // rules
                 if (count < 2 || count > 3){
@@ -51,8 +51,8 @@ const Main = () =>{
     }
     
     const startButton = () => {
-        clearInterval(intervalId)
         if (run){
+            clearInterval(intervalId)
             setRun(false)
         } else {
             setRun(true)
@@ -66,12 +66,10 @@ const Main = () =>{
     }
 
     const nextButton = () => {
-        clearInterval(intervalId)
         setGeneration(generation => generation + 1)
     }
 
     const start = () => {
-        clearInterval(intervalId)
         setGeneration(generation => generation + 1)
     }
 
