@@ -25,7 +25,7 @@ const AboutPage = () => {
                             <li>Any dead cell with three live neighbours becomes a live cell.</li>
                             <li>All other live cells die in the next generation. Similarly, all other dead cells stay dead.</li>
                         </ol>
-                        <h6>Note: In this particular project, the left and right edge of the grid wraps around to each other. However, the top and bottom edges do not.</h6>
+                        <h6>Note: In this particular project, the left and right edge of the grid wrap around. However, the top and bottom edges do not wrap around and any cell that goes above those bounds are considered dead.</h6>
                 </div>
                 <div className="rules others">
                     <div className="subtitle"><h3>About Me</h3></div>
