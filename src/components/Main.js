@@ -20,8 +20,78 @@ const Main = () =>{
 
     const runRef = useRef(run)
     runRef.current = run
+    const generationRef = useRef(generation)
+    generationRef.current = generation
+    const dllRef = useRef(dll)
+    dllRef.current = dll
 
-    useEffect(()=>{
+    const selectBox = (index) => {
+        if (!run){
+            let newDll = new DoublyLinkedList()
+            let node = dll.getNodeAtIndex(index)
+            node.value = !node.value
+            for(let i = 0; i < dll.length; i++){
+                newDll.push(dll.getNodeAtIndex(i).value)
+            }
+            
+            setDll(newDll)
+        }
+    }
+    
+    const startButton = () => {
+        if (!runRef.current){
+            return
+        }
+        setGeneration(generationRef.current + 1)
+        let newDll = new DoublyLinkedList()
+        for(let i = 0; i < dllRef.current.length; i++){
+            const currentNode = dllRef.current.getNodeAtIndex(i)
+            let count = 0;
+
+            // left
+            if(currentNode) if(currentNode.prev) if(currentNode.prev.value) count++
+
+            // right
+            if(currentNode) if(currentNode.next) if(currentNode.next.value) count++
+
+            // above
+            const aboveNode = dllRef.current.getNodeAtIndex(i-cols)
+            if(aboveNode) if(aboveNode.value) count++
+            
+            // upper left
+            if(aboveNode) if(aboveNode.prev) if(aboveNode.prev.value) count++
+            
+            // upper right
+            if(aboveNode) if(aboveNode.next) if(aboveNode.next.value) count++
+
+            // below
+            const belowNode = dllRef.current.getNodeAtIndex(i+cols)
+            if(belowNode) if(belowNode.value) count++
+
+            // lower left
+            if(belowNode) if(belowNode.prev) if(belowNode.prev.value) count++
+            
+            // lower right
+            if(belowNode) if(belowNode.next) if(belowNode.next.value) count++
+
+
+            if (count < 2 || count > 3){
+                newDll.push(false)
+            }
+            if (count === 3){
+                newDll.push(true)
+            }
+            if (count === 2){
+                newDll.push(currentNode.value)
+            }
+        }
+        setDll(newDll) 
+
+        setTimeout(startButton, speed)
+    }
+
+    const nextButton = async () => {
+        setGeneration(generation + 1)
         let newDll = new DoublyLinkedList()
         for(let i = 0; i < dll.length; i++){
             const currentNode = dll.getNodeAtIndex(i)
@@ -64,33 +134,7 @@ const Main = () =>{
                 newDll.push(currentNode.value)
             }
         }
-        setDll(newDll)
-    }, [generation])
-
-    const selectBox = (index) => {
-        if (!run){
-            let newDll = new DoublyLinkedList()
-            let node = dll.getNodeAtIndex(index)
-            node.value = !node.value
-            for(let i = 0; i < dll.length; i++){
-                newDll.push(dll.getNodeAtIndex(i).value)
-            }
-            
-            setDll(newDll)
-        }
-    }
-    
-    const startButton = useCallback(() => {
-        if (!runRef.current){
-            return
-        }
-        
-        setGeneration(generation => generation + 1)
-        setTimeout(startButton, speed)
-    }, [])
-
-    const nextButton = () => {
-        setGeneration(generation => generation + 1)
+        setDll(newDll) 
     }
 
     const seed = (number=30) => {
@@ -131,9 +175,8 @@ const Main = () =>{
                 <h1>Conway's Game of Life</h1>
                 <div className="buttons_container">
                     <button 
-                        onClick={() => {
-                            setRun(!run);
-                            runRef.current = true;
+                        onClick={async () => {
+                            await setRun(!run);
                             startButton()
                         }}
                         title="Start the Game of Life" 
