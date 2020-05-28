@@ -15,6 +15,7 @@ const Main = () =>{
     const [cols, setCols] = useState(width)
     const [speed, setSpeed] = useState(1)
     const [generation, setGeneration] = useState(0)
+    const [population, setPopulation] = useState(0)
     const [run, setRun] = useState(false)
     const [dll, setDll] = useState(initialDll)
 
@@ -52,6 +53,7 @@ const Main = () =>{
         let currentNode = dllRef.current.head
         let aboveNode = dllRef.current.getNodeAtIndex(-cols)
         let belowNode = dllRef.current.getNodeAtIndex(cols)
+        let popCount = 0
 
         for(let i = 0; i < dllRef.current.length; i++){
             let count = 0;
@@ -112,6 +114,7 @@ const Main = () =>{
             if (count < 2 || count > 3){
                 newDll.push(false)
             } else if(count === 3){
+                popCount++
                 newDll.push(true)
             } else if (count === 2){
                 newDll.push(currentNode.value)
@@ -138,16 +141,19 @@ const Main = () =>{
                 currentNode = null
             }
         }
+        setPopulation(popCount)
         setDll(newDll) 
     }
 
     const seed = (number=30) => {
         let newDll = new DoublyLinkedList()
-        
+        let popCount = 0
         let current = dll.head
+
         while(current.next){
             if (Math.floor(Math.random() * 1/number*100) === 0){
                 newDll.push(true)
+                popCount++
             }
             else {
                 newDll.push(false)
@@ -156,6 +162,8 @@ const Main = () =>{
         }
         // add last box
         newDll.push(Math.floor(Math.random() * 1/number*100)===0?true:false)
+
+        setPopulation(popCount)
         setDll(newDll)
     }
 
@@ -199,6 +207,7 @@ const Main = () =>{
                 <div className="middle">
                         <Grid dll={dll} rows={rows} cols={cols} selectBox={selectBox}/>
                         <h2 title="The current generation.">Generations: {generation}</h2>
+                        <div className="midSection" title="How many cells are currently alive."><h4>Population:</h4><span className="midSection">{population}</span></div>
                         <div className="midSection"><h4 title="The size of the grid, automatically calculated based on your window size.">Grid size:</h4><span className="midSection">{width} x {height} = {width*height}</span></div>
                 </div>
             </div>

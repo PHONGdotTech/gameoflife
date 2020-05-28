@@ -8,6 +8,8 @@ const Grid = (props) =>{
 
     let index = 0
     let current = props.dll.head
+
+    // loop through the dll and create a box for each node, then append to rowsArr to be returned in the grid
     while(current.next){
         const boxClass = current.value ? "box on" : "box off"
         rowsArr.push(<Box boxClass={boxClass} key={index} index={index} selectBox={props.selectBox}/>)
