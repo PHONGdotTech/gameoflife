@@ -15,7 +15,6 @@ const Main = () =>{
     const [cols, setCols] = useState(width)
     const [speed, setSpeed] = useState(1)
     const [generation, setGeneration] = useState(0)
-    const [intervalId, setIntervalId] = useState()
     const [run, setRun] = useState(false)
     const [dll, setDll] = useState(initialDll)
 
@@ -55,31 +54,6 @@ const Main = () =>{
             if(belowNode) if(belowNode.next) if(belowNode.next.value) count++
 
 
-            // // left
-            // if(dll.getNodeAtIndex(i-1).value) count++;
-
-            // // right
-            // if(dll.getNodeAtIndex(i+1).value) count++;
-
-            // // above
-            // if(dll.getNodeAtIndex(i-cols).value) count++
-
-            // // below
-            // if(dll.getNodeAtIndex(i+cols).value) count++;
-
-            // // upper left
-            // if(dll.getNodeAtIndex((i-cols)-1).value) count++;
-
-            // // upper right
-            // if(dll.getNodeAtIndex((i-cols)+1).value) count++;
-
-            // // lower left
-            // if(dll.getNodeAtIndex((i+cols)-1).value) count++;
-
-            // // lower right
-            // if(dll.getNodeAtIndex((i+cols)+1).value) count++;
-
-
             if (count < 2 || count > 3){
                 newDll.push(false)
             }
@@ -112,19 +86,10 @@ const Main = () =>{
         }
         
         setGeneration(generation => generation + 1)
-        setTimeout(startButton, 0)
+        setTimeout(startButton, speed)
     }, [])
 
-    const stopButton = () => {
-        clearInterval(intervalId)
-        setRun(false)
-    }
-
     const nextButton = () => {
-        setGeneration(generation => generation + 1)
-    }
-
-    const start = () => {
         setGeneration(generation => generation + 1)
     }
 
@@ -170,7 +135,8 @@ const Main = () =>{
                             setRun(!run);
                             runRef.current = true;
                             startButton()
-                        }} 
+                        }}
+                        title="Start the Game of Life" 
                         style={
                             run ?
                                 {color: "red", border: "red 1px solid"}:
@@ -179,15 +145,14 @@ const Main = () =>{
                     >
                         {run ? "Stop" : "Start"}
                     </button>
-                    {/* <button onClick={() => stopButton()}>Stop</button> */}
-                    <button onClick={() => nextButton()}>Next Generation</button>
-                    <button onClick={() => seed()}>Randomize</button>
-                    <button onClick={() => reset()}>Reset</button>
+                    <button title="Go to the next generation" onClick={() => nextButton()}>Next Generation</button>
+                    <button title="Randomly select the grid's status" onClick={() => seed()}>Randomize</button>
+                    <button title="Reset the grid and the generations" onClick={() => reset()}>Reset</button>
                 </div>
                 <div className="middle">
                         <Grid dll={dll} rows={rows} cols={cols} selectBox={selectBox}/>
-                        <h2>Generations: {generation}</h2>
-                        <div className="midSection"><h4>Grid size:</h4><span className="midSection">{width} x {height} = {width*height}</span></div>
+                        <h2 title="The current generation.">Generations: {generation}</h2>
+                        <div className="midSection"><h4 title="The size of the grid, automatically calculated based on your window size.">Grid size:</h4><span className="midSection">{width} x {height} = {width*height}</span></div>
                 </div>
             </div>
             <div className="about">
