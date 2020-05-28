@@ -170,8 +170,8 @@ const Main = () =>{
     }
 
     const reset = () => {
-        const height = Math.floor((getWindowDimensions().height / 15))
-        const width = Math.floor((getWindowDimensions().width / 12))
+        const height = Math.floor((getWindowDimensions().height / 18))
+        const width = Math.floor((getWindowDimensions().width / 15))
 
         let newDll = new DoublyLinkedList()
         for(let i = 0; i < height*width; i++){
