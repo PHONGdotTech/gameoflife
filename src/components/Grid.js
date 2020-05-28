@@ -5,20 +5,21 @@ const Grid = (props) =>{
     const width = props.cols*15 + props.cols
 
     var rowsArr = []
-    let boxClass =""
 
-    for(let row = 0; row<props.rows; row++){
-        for(let col = 0; col<props.cols; col++){
-            let boxId = row + "_" + col;
+    let index = 0
+    let current = props.dll.head
 
-            boxClass = props.gridFull[row][col] ? "box on" : "box off"
-            rowsArr.push(
-                <Box boxClass={boxClass} key={boxId} boxId={boxId} row={row} col={col} selectBox={props.selectBox}/>
-            )
-
-        }
+    // loop through the dll and create a box for each node, then append to rowsArr to be returned in the grid
+    while(current.next){
+        const boxClass = current.value ? "box on" : "box off"
+        rowsArr.push(<Box boxClass={boxClass} key={index} index={index} selectBox={props.selectBox}/>)
+        
+        index++ 
+        current = current.next
     }
-
+    // add last box
+    rowsArr.push(<Box boxClass={props.dll.tail.value?"box on":"box off"} key={index} index={index} selectBox={props.selectBox}/>)
+    
 
     return(
         <div className="grid" style={{width: width}}>
