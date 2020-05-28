@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback, useRef} from 'react';
 import {DoublyLinkedList} from '../data_structures/doubly_linked_list'
 import Grid from "./Grid"
 
@@ -20,9 +20,11 @@ const Main = () =>{
     const [run, setRun] = useState(false)
     const [dll, setDll] = useState(initialDll)
 
+    const runRef = useRef(run)
+    runRef.current = run
+
     useEffect(()=>{
         let newDll = new DoublyLinkedList()
-
         for(let i = 0; i < dll.length; i++){
             let currentNode = dll.getNodeAtIndex(i)
             let count = 0;
@@ -59,10 +61,9 @@ const Main = () =>{
             if (count === 2){
                 newDll.push(currentNode.value)
             }
-        
         }
+        
         setDll(newDll)
-
     }, [generation])
 
     const selectBox = (index) => {
@@ -78,15 +79,13 @@ const Main = () =>{
         }
     }
     
-    const startButton = () => {
-        if (run){
-            clearInterval(intervalId)
-            setRun(false)
-        } else {
-            setRun(true)
-            setIntervalId(setInterval(start, speed))
+    const startButton = useCallback(() => {
+        if (!runRef.current){
+            return
         }
-    }
+        setGeneration(generation => generation + 1)
+        setTimeout(startButton, 0)
+    }, [])
 
     const stopButton = () => {
         clearInterval(intervalId)
@@ -103,21 +102,25 @@ const Main = () =>{
 
     const seed = (number=30) => {
         let newDll = new DoublyLinkedList()
-        for(let i = 0; i < dll.length; i++){
+        
+        let current = dll.head
+        while(current.next){
             if (Math.floor(Math.random() * 1/number*100) === 0){
                 newDll.push(true)
             }
             else {
                 newDll.push(false)
             }
+            current = current.next
         }
+        // add last box
+        newDll.push(Math.floor(Math.random() * 1/number*100)===0?true:false)
         setDll(newDll)
     }
 
     const reset = () => {
         setDll(initialDll)
         setGeneration(0)
-        clearInterval(intervalId)
     }
 
     return (
@@ -125,7 +128,11 @@ const Main = () =>{
             <h1>Conway's Game of Life</h1>
             <div className="buttons_container">
                 <button 
-                    onClick={() => startButton()} 
+                    onClick={() => {
+                        setRun(!run);
+                        runRef.current = true;
+                        startButton()
+                    }} 
                     style={
                         run ?
                             {color: "red", border: "red 1px solid"}:

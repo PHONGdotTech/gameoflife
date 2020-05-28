@@ -6,15 +6,18 @@ const Grid = (props) =>{
 
     var rowsArr = []
 
-    for(let i = 0; i < props.dll.length; i++){
-        const currentValue = props.dll.getNodeAtIndex(i).value
-        const boxClass = currentValue ? "box on" : "box off"
-        const index = i
-
-        rowsArr.push(
-            <Box boxClass={boxClass} key={index} index={index} selectBox={props.selectBox}/>
-        )
+    let index = 0
+    let current = props.dll.head
+    while(current.next){
+        const boxClass = current.value ? "box on" : "box off"
+        rowsArr.push(<Box boxClass={boxClass} key={index} index={index} selectBox={props.selectBox}/>)
+        
+        index++ 
+        current = current.next
     }
+    // add last box
+    rowsArr.push(<Box boxClass={props.dll.tail.value?"box on":"box off"} key={index} index={index} selectBox={props.selectBox}/>)
+    
 
     return(
         <div className="grid" style={{width: width}}>
