@@ -42,6 +42,11 @@ const Main = () =>{
         if (!runRef.current){
             return
         }
+        nextButton()
+        setTimeout(startButton, speed)
+    }
+
+    const nextButton = () => {
         setGeneration(generationRef.current + 1)
         let newDll = new DoublyLinkedList()
         for(let i = 0; i < dllRef.current.length; i++){
@@ -66,55 +71,6 @@ const Main = () =>{
 
             // below
             const belowNode = dllRef.current.getNodeAtIndex(i+cols)
-            if(belowNode) if(belowNode.value) count++
-
-            // lower left
-            if(belowNode) if(belowNode.prev) if(belowNode.prev.value) count++
-            
-            // lower right
-            if(belowNode) if(belowNode.next) if(belowNode.next.value) count++
-
-
-            if (count < 2 || count > 3){
-                newDll.push(false)
-            }
-            if (count === 3){
-                newDll.push(true)
-            }
-            if (count === 2){
-                newDll.push(currentNode.value)
-            }
-        }
-        setDll(newDll) 
-
-        setTimeout(startButton, speed)
-    }
-
-    const nextButton = async () => {
-        setGeneration(generation + 1)
-        let newDll = new DoublyLinkedList()
-        for(let i = 0; i < dll.length; i++){
-            const currentNode = dll.getNodeAtIndex(i)
-            let count = 0;
-
-            // left
-            if(currentNode) if(currentNode.prev) if(currentNode.prev.value) count++
-
-            // right
-            if(currentNode) if(currentNode.next) if(currentNode.next.value) count++
-
-            // above
-            const aboveNode = dll.getNodeAtIndex(i-cols)
-            if(aboveNode) if(aboveNode.value) count++
-            
-            // upper left
-            if(aboveNode) if(aboveNode.prev) if(aboveNode.prev.value) count++
-            
-            // upper right
-            if(aboveNode) if(aboveNode.next) if(aboveNode.next.value) count++
-
-            // below
-            const belowNode = dll.getNodeAtIndex(i+cols)
             if(belowNode) if(belowNode.value) count++
 
             // lower left
