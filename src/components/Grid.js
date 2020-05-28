@@ -2,7 +2,7 @@ import React from 'react';
 import Box from './Box'
 
 const Grid = (props) =>{
-    const width = props.cols*15 + props.cols
+    const width = props.cols*12 + props.cols
 
     var rowsArr = []
 

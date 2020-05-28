@@ -3,8 +3,8 @@ import {DoublyLinkedList} from '../data_structures/doubly_linked_list'
 import Grid from "./Grid"
 
 const Main = () =>{
-    const height = Math.floor((getWindowDimensions().height / 30))
-    const width = Math.floor((getWindowDimensions().width / 25))
+    const height = Math.floor((getWindowDimensions().height / 18))
+    const width = Math.floor((getWindowDimensions().width / 15))
     
     const initialDll = new DoublyLinkedList()
     for(let i = 0; i < height*width; i++){
@@ -170,8 +170,8 @@ const Main = () =>{
     }
 
     const reset = () => {
-        const height = Math.floor((getWindowDimensions().height / 30))
-        const width = Math.floor((getWindowDimensions().width / 25))
+        const height = Math.floor((getWindowDimensions().height / 15))
+        const width = Math.floor((getWindowDimensions().width / 12))
 
         let newDll = new DoublyLinkedList()
         for(let i = 0; i < height*width; i++){
