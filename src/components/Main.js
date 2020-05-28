@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useCallback, useRef} from 'react';
+import React, {useState, useRef} from 'react';
 import {DoublyLinkedList} from '../data_structures/doubly_linked_list'
 import Grid from "./Grid"
 
@@ -152,23 +152,6 @@ const Main = () =>{
                         <Grid dll={dll} rows={rows} cols={cols} selectBox={selectBox}/>
                         <h2 title="The current generation.">Generations: {generation}</h2>
                         <div className="midSection"><h4 title="The size of the grid, automatically calculated based on your window size.">Grid size:</h4><span className="midSection">{width} x {height} = {width*height}</span></div>
-                </div>
-            </div>
-            <div className="about">
-                <div className="about_section">
-                    <div className="rules text">
-                        <h4>About The Game of Life</h4>
-                        <p>The Game of Life, also known simply as Life, is a cellular automaton devised by the British mathematician John Horton Conway in 1970. It is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input.</p>
-                        <span><a href="https://en.wikipedia.org/wiki/Conway's_Game_of_Life" target="_blank">Wikipedia</a></span>
-                    </div>
-                    <div className="rules">
-                        <ol>
-                            <h4>Rules</h4>
-                            <li>Any live cell with two or three live neighbours survives.</li>
-                            <li>Any dead cell with three live neighbours becomes a live cell.</li>
-                            <li>All other live cells die in the next generation. Similarly, all other dead cells stay dead.</li>
-                        </ol>
-                    </div>
                 </div>
             </div>
         </div>

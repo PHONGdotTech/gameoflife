@@ -1,5 +1,4 @@
 .App {
-  background-color: white;
   text-align: center;
 }
 
@@ -118,18 +117,23 @@ button{
 
 .about_section{
   display: flex;
+  flex-wrap: wrap;
   width: 100%;
 }
 
 .rules{
-  width: 50%;
+  width: 40%;
   display: flex;
   flex-direction: column;
   text-align: left;
-  padding: 0 5%;
+  padding: 3% 5%;
 }
 
-.text{
+.list{
+  padding: 2%;
+  margin: 0;
+}
+
+.others:nth-child(4n), .others:nth-child(4n+1){
   background-color: silver;
-  padding: 20px 5%;
 }
