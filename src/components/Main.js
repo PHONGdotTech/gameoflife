@@ -25,6 +25,8 @@ const Main = () =>{
     generationRef.current = generation
     const dllRef = useRef(dll)
     dllRef.current = dll
+    const popRef = useRef(population)
+    popRef.current = population
 
     const selectBox = (index) => {
         if (!run){
@@ -210,7 +212,7 @@ const Main = () =>{
                 <div className="middle">
                         <Grid dll={dll} rows={rows} cols={cols} selectBox={selectBox}/>
                         <h2 title="The current generation.">Generations: {generation}</h2>
-                        <div className="midSection" title="How many cells are currently alive."><h4>Population:</h4><span className="midSection">{population}</span></div>
+                        <div className="midSection" title="How many cells are currently alive."><h4>Population:</h4><span className="midSection">{popRef.current}</span></div>
                         <div className="midSection"><h4 title="The size of the grid, automatically calculated based on your window size.">Grid size:</h4><span className="midSection">{width} x {height} = {width*height}</span></div>
                 </div>
             </div>
