@@ -1,4 +1,5 @@
 .App {
+  background-color: white;
   text-align: center;
 }
 
@@ -84,4 +85,51 @@
 
 button{
   margin: 0 1%;
+}
+
+.middle{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.midSection{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 0 5px;
+}
+
+.game{
+  width: 100%;
+  padding: 1% 0;
+}
+
+.about{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: lightgray;
+  width: 100%;
+  border-top: solid black 1px;
+}
+
+.about_section{
+  display: flex;
+  width: 100%;
+}
+
+.rules{
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding: 0 5%;
+}
+
+.text{
+  background-color: silver;
+  padding: 20px 5%;
 }
