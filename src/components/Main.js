@@ -49,45 +49,93 @@ const Main = () =>{
     const nextButton = () => {
         setGeneration(generationRef.current + 1)
         let newDll = new DoublyLinkedList()
+        let currentNode = dllRef.current.head
+        let aboveNode = dllRef.current.getNodeAtIndex(-cols)
+        let belowNode = dllRef.current.getNodeAtIndex(cols)
+
         for(let i = 0; i < dllRef.current.length; i++){
-            const currentNode = dllRef.current.getNodeAtIndex(i)
             let count = 0;
 
-            // left
-            if(currentNode) if(currentNode.prev) if(currentNode.prev.value) count++
-
-            // right
-            if(currentNode) if(currentNode.next) if(currentNode.next.value) count++
+            // current+left+right
+            if(currentNode){
+                if(currentNode.prev){
+                    if(currentNode.prev.value){
+                        count++
+                    }
+                }
+                if(currentNode.next){
+                    if(currentNode.next.value){
+                        count++
+                    } 
+                } 
+            }
 
             // above
-            const aboveNode = dllRef.current.getNodeAtIndex(i-cols)
-            if(aboveNode) if(aboveNode.value) count++
-            
-            // upper left
-            if(aboveNode) if(aboveNode.prev) if(aboveNode.prev.value) count++
-            
-            // upper right
-            if(aboveNode) if(aboveNode.next) if(aboveNode.next.value) count++
+            if(aboveNode){
+                if(aboveNode.value){
+                    count++
+                } 
+                if(aboveNode.prev){
+                    if(aboveNode.prev.value) {
+                        count++
+                    }
+                } 
+                if(aboveNode.next){
+                    if(aboveNode.next.value){
+                        count++
+                    } 
+                }
+            } else {
+                aboveNode = dllRef.current.getNodeAtIndex(i-cols)
+            }
 
             // below
-            const belowNode = dllRef.current.getNodeAtIndex(i+cols)
-            if(belowNode) if(belowNode.value) count++
+            if(belowNode){
+                if(belowNode.value){
+                    count++
+                } 
+                if(belowNode.prev){
+                    if(belowNode.prev.value){
+                        count++
+                    } 
+                }
+                if(belowNode.next){
+                    if(belowNode.next.value){
+                        count++
+                    } 
+                } 
+            } else {
+                belowNode = dllRef.current.getNodeAtIndex(i+cols)
+            }
 
-            // lower left
-            if(belowNode) if(belowNode.prev) if(belowNode.prev.value) count++
-            
-            // lower right
-            if(belowNode) if(belowNode.next) if(belowNode.next.value) count++
-
-
+            // push value to new dll depending on count
             if (count < 2 || count > 3){
                 newDll.push(false)
-            }
-            if (count === 3){
+            } else if(count === 3){
                 newDll.push(true)
-            }
-            if (count === 2){
+            } else if (count === 2){
                 newDll.push(currentNode.value)
+            }
+
+            // get new above node
+            if (aboveNode.next){
+                aboveNode = aboveNode.next
+            } else{
+                aboveNode = null
+            }
+
+            // get new below node
+            if (belowNode.next){
+                belowNode = belowNode.next
+            } else{
+                belowNode = null
+            }
+
+            // get new current node
+            if (currentNode.next){
+                currentNode = currentNode.next
+            } else{
+                currentNode = null
             }
         }
         setDll(newDll) 
