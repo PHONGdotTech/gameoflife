@@ -177,6 +177,7 @@ const Main = () =>{
         for(let i = 0; i < height*width; i++){
             newDll.push(false)
         }
+        setPopulation(0)
         setRows(height)
         setCols(width)
         setDll(newDll)
