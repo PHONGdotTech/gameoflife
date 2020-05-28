@@ -5,8 +5,6 @@ import Grid from "./Grid"
 const Main = () =>{
     const height = Math.floor((getWindowDimensions().height / 30))
     const width = Math.floor((getWindowDimensions().width / 25))
-    // const height = 25
-    // const width = 25
     
     const initialDll = new DoublyLinkedList()
     for(let i = 0; i < height*width; i++){
@@ -149,7 +147,16 @@ const Main = () =>{
     }
 
     const reset = () => {
-        setDll(initialDll)
+        const height = Math.floor((getWindowDimensions().height / 30))
+        const width = Math.floor((getWindowDimensions().width / 25))
+
+        let newDll = new DoublyLinkedList()
+        for(let i = 0; i < height*width; i++){
+            newDll.push(false)
+        }
+        setRows(height)
+        setCols(width)
+        setDll(newDll)
         setGeneration(0)
     }
 
