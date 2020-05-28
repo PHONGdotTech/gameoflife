@@ -121,6 +121,13 @@ button{
   width: 100%;
 }
 
+.subtitle{
+  text-align: center;
+  border: solid black 1px;
+  margin-bottom: 1%;
+  background-color: rgba(0, 143, 41, 0.151);
+}
+
 .rules{
   width: 40%;
   display: flex;

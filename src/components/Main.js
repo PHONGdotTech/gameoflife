@@ -118,6 +118,7 @@ const Main = () =>{
                 newDll.push(true)
             } else if (count === 2){
                 newDll.push(currentNode.value)
+                if (currentNode.value) popCount++
             }
 
             // get new above node
@@ -162,6 +163,7 @@ const Main = () =>{
         }
         // add last box
         newDll.push(Math.floor(Math.random() * 1/number*100)===0?true:false)
+        if (newDll.tail.value) popCount++
 
         setPopulation(popCount)
         setDll(newDll)
