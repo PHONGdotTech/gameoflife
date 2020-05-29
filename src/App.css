@@ -145,7 +145,7 @@ button{
   background-color: silver;
 }
 
-@media screen and (max-width: 480px){
+@media screen and (max-width: 560px){
   .buttons_container{
     width: 95%;
   }
@@ -160,5 +160,9 @@ button{
 
   .rules{
     width: 100%;
+  }
+
+  .hide_when_small{
+    display: none;
   }
 }

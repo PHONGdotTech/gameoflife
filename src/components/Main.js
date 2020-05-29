@@ -171,6 +171,61 @@ const Main = () =>{
         setDll(newDll)
     }
 
+    const loadGun = () => {
+        let newDll = dllRef.current
+        newDll.setNodeAtIndex(16, true)
+        newDll.setNodeAtIndex(17+cols, true)
+        newDll.setNodeAtIndex(15+(2*cols), true)
+        newDll.setNodeAtIndex(16+(2*cols), true)
+        newDll.setNodeAtIndex(17+(2*cols), true)
+        newDll.setNodeAtIndex(23+(4*cols), true)
+        newDll.setNodeAtIndex(25+(4*cols), true)
+        newDll.setNodeAtIndex(21+(5*cols), true)
+        newDll.setNodeAtIndex(25+(5*cols), true)
+        newDll.setNodeAtIndex(13+(6*cols), true)
+        newDll.setNodeAtIndex(21+(6*cols), true)
+        newDll.setNodeAtIndex(12+(7*cols), true)
+        newDll.setNodeAtIndex(13+(7*cols), true)
+        newDll.setNodeAtIndex(14+(7*cols), true)
+        newDll.setNodeAtIndex(15+(7*cols), true)
+        newDll.setNodeAtIndex(20+(7*cols), true)
+        newDll.setNodeAtIndex(25+(7*cols), true)
+        newDll.setNodeAtIndex(34+(7*cols), true)
+        newDll.setNodeAtIndex(35+(7*cols), true)
+        newDll.setNodeAtIndex(11+(8*cols), true)
+        newDll.setNodeAtIndex(12+(8*cols), true)
+        newDll.setNodeAtIndex(14+(8*cols), true)
+        newDll.setNodeAtIndex(16+(8*cols), true)
+        newDll.setNodeAtIndex(21+(8*cols), true)
+        newDll.setNodeAtIndex(34+(8*cols), true)
+        newDll.setNodeAtIndex(35+(8*cols), true)
+        newDll.setNodeAtIndex((9*cols), true)
+        newDll.setNodeAtIndex(1+(9*cols), true)
+        newDll.setNodeAtIndex(10+(9*cols), true)
+        newDll.setNodeAtIndex(11+(9*cols), true)
+        newDll.setNodeAtIndex(12+(9*cols), true)
+        newDll.setNodeAtIndex(14+(9*cols), true)
+        newDll.setNodeAtIndex(17+(9*cols), true)
+        newDll.setNodeAtIndex(21+(9*cols), true)
+        newDll.setNodeAtIndex(25+(9*cols), true)
+        newDll.setNodeAtIndex((10*cols), true)
+        newDll.setNodeAtIndex(1+(10*cols), true)
+        newDll.setNodeAtIndex(11+(10*cols), true)
+        newDll.setNodeAtIndex(12+(10*cols), true)
+        newDll.setNodeAtIndex(14+(10*cols), true)
+        newDll.setNodeAtIndex(16+(10*cols), true)
+        newDll.setNodeAtIndex(23+(10*cols), true)
+        newDll.setNodeAtIndex(25+(10*cols), true)
+        newDll.setNodeAtIndex(12+(11*cols), true)
+        newDll.setNodeAtIndex(13+(11*cols), true)
+        newDll.setNodeAtIndex(14+(11*cols), true)
+        newDll.setNodeAtIndex(15+(11*cols), true)
+        newDll.setNodeAtIndex(13+(12*cols), true)
+
+        setPopulation(39)
+        setDll(newDll)
+    }
+
     const reset = () => {
         const height = Math.floor((getWindowDimensions().height / 18))
         const width = Math.floor((getWindowDimensions().width / 15))
@@ -179,6 +234,7 @@ const Main = () =>{
         for(let i = 0; i < height*width; i++){
             newDll.push(false)
         }
+        dllRef.current = newDll
         setPopulation(0)
         setRows(height)
         setCols(width)
@@ -207,6 +263,11 @@ const Main = () =>{
                     </button>
                     <button title="Go to the next generation" onClick={() => nextButton()}>Next Generation</button>
                     <button title="Randomly select the grid's status" onClick={() => seed()}>Randomize</button>
+                    <button title="Load a preset called the Gosper glider gun." className="hide_when_small" onClick={async ()=>{
+                        await reset();
+                        loadGun()}}>
+                            Load Gun
+                    </button>
                     <button title="Reset the grid and the generations" onClick={() => reset()}>Reset</button>
                 </div>
                 <div className="middle">
