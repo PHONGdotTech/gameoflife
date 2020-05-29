@@ -11,7 +11,7 @@ const AboutPage = () => {
                 </div>
                 <div className="rules others">
                     <div className="subtitle"><h3>Instructions</h3></div>
-                    <li>Click <button style={{color: "green", border: "green 1px solid"}}>Start</button> to begin simulating. This button only appears if simulation <strong>is not</strong> running.</li>
+                    <li>Click <button style={{color: "green", border: "green 1px solid"}}>Start</button> to begin simulating. This button only appears if the simulation <strong>is not</strong> running.</li>
                     <li>Click <button style={{color: "red", border: "red 1px solid"}}>Stop</button> to stop simulating. This button only appears if the simulation <strong>is</strong> running.</li>
                     <li>Click <button>Next Generation</button> to go to the next life-cycle generation.</li>
                     <li>Click <button>Randomize</button> to randomly populate the grid with live cells. Each box has a 30% chance to be alive.</li>

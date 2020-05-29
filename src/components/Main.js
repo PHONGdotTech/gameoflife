@@ -244,8 +244,8 @@ const Main = () =>{
 
     return (
         <div className="main">
-            <div className="main game">
-                <h1>Conway's Game of Life</h1>
+            <div className="main">
+                <h1 className="title">Conway's Game of Life</h1>
                 <div className="buttons_container">
                     <button 
                         onClick={async () => {
@@ -263,11 +263,13 @@ const Main = () =>{
                     </button>
                     <button title="Go to the next generation" onClick={() => nextButton()}>Next Generation</button>
                     <button title="Randomly select the grid's status" onClick={() => seed()}>Randomize</button>
-                    <button title="Load a preset called the Gosper glider gun." className="hide_when_small" onClick={async ()=>{
-                        await reset();
-                        loadGun()}}>
-                            Load Gun
-                    </button>
+                    {cols > 37 ? 
+                        <button title="Load a preset called the Gosper glider gun." className="hide_when_small" onClick={()=>{
+                            reset();
+                            loadGun()}}>
+                                Load Gosper Gun
+                        </button> : ""
+                    }
                     <button title="Reset the grid and the generations" onClick={() => reset()}>Reset</button>
                 </div>
                 <div className="middle">
