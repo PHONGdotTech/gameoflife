@@ -78,6 +78,11 @@
   background-color: silver;
 }
 
+.dying{
+  background-color: rgb(150, 218, 162);
+  border: solid gray 1px;
+}
+
 .main{
   display: flex;
   flex-direction: column;
@@ -94,6 +99,20 @@
 
 button{
   margin: 0 1%;
+}
+
+.key_container{
+  display: flex;
+  width: auto;
+  justify-content: space-between;
+}
+
+.key{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 2rem;
+  width: auto;
 }
 
 .middle{
