@@ -256,8 +256,13 @@ const Main = () =>{
 
     return (
         <div className="main">
-            <div className="main">
-                <h1 className="title">Conway's Game of Life</h1>
+            <h1 className="title">Conway's Game of Life</h1>
+            <div className="bannerSection">
+                <div className="stats">
+                    <div className="stats_subsection" title="The current generation."><h4>Generations:</h4><span className="midSection">{generation}</span></div>
+                    <div className="stats_subsection" title="How many cells are currently alive."><h4>Population:</h4><span className="midSection">{popRef.current}</span></div>
+                    <div className="stats_subsection" title="The size of the grid, automatically calculated based on your window size."><h4>Grid size:</h4><span className="midSection">{width} x {height} = {width*height}</span></div>
+                </div>
                 <div className="buttons_container">
                     <button 
                         onClick={async () => {
@@ -267,8 +272,8 @@ const Main = () =>{
                         title="Start the Game of Life" 
                         style={
                             run ?
-                                {color: "red", border: "red 1px solid"}:
-                            {color: "green", border: "green 1px solid"}
+                                {color: "red", border: "red double"}:
+                            {color: "green", border: "green double"}
                         }
                     >
                         {run ? "Stop" : "Start"}
@@ -284,17 +289,14 @@ const Main = () =>{
                     }
                     <button title="Reset the grid and the generations" onClick={() => reset()}>Reset</button>
                 </div>
-                <div className="middle">
-                        <Grid dll={dll} rows={rows} cols={cols} selectBox={selectBox}/>
-                        <div className="key_container">
-                            <div className="key"><div className="box on"/><span>Alive</span></div>
-                            <div className="key"><div className="box dying"/><span>Just died</span></div>
-                            <div className="key"><div className="box off"/><span>Dead</span></div>
-                        </div>
-                        <h2 title="The current generation.">Generations: {generation}</h2>
-                        <div className="midSection" title="How many cells are currently alive."><h4>Population:</h4><span className="midSection">{popRef.current}</span></div>
-                        <div className="midSection"><h4 title="The size of the grid, automatically calculated based on your window size.">Grid size:</h4><span className="midSection">{width} x {height} = {width*height}</span></div>
-                </div>
+            </div>
+            <div className="grid_main_section">
+                    <Grid dll={dll} rows={rows} cols={cols} selectBox={selectBox}/>
+                    <div className="key_container">
+                        <div className="key"><div className="box on"/><span className="midSection">Alive</span></div>
+                        <div className="key"><div className="box dying"/><span className="midSection">Recently died</span></div>
+                        <div className="key"><div className="box off"/><span className="midSection">Dead</span></div>
+                    </div>
             </div>
         </div>
     )

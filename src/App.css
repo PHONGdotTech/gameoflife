@@ -41,12 +41,26 @@
   width: 100%;
   margin: 0;
   margin-bottom: 1%;
-  padding: 1% 0;
+  color: white;
+  background-color: black;
+}
+
+.footer{
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: white;
+  background-color: black;
+  height: 4rem;
+}
+
+h1{
+  text-shadow: rgb(48, 29, 0) 3px 3px;
 }
 
 .grid{
   width: 960px;
-  background-color: orange;
+  background-color: rgb(88, 50, 0);
   display: flex;
   flex-wrap: wrap;
   border: solid black 1px;
@@ -57,7 +71,7 @@
 }
 
 .box{
-  border: solid gray 1px;
+  border: solid black 1px;
   border-radius: 5px;
   width: 12px;
   height: 12px;
@@ -66,45 +80,75 @@
 }
 
 .box:hover{
-  background-color: cyan
+  background-color: rgb(158, 0, 0)
 }
 
 .on{
-  background-color: green;
-  border: solid limegreen 1px;
+  background-color: rgb(207, 135, 0);
+  border: solid black 1px;
 }
 
 .off{
-  background-color: silver;
+  background-color: rgb(48, 29, 0);
 }
 
 .dying{
-  background-color: rgb(150, 218, 162);
-  border: solid gray 1px;
+  background-color: rgb(88, 50, 0);
+  border: solid black 1px;
 }
 
 .main{
+  background-color: rgb(206, 182, 140);
   display: flex;
   flex-direction: column;
   width: 100%;
   align-items: center;
 }
 
-.buttons_container{
+.bannerSection{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.stats{
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 5%;
+  padding: 0;
+  width: 45%;
+}
+
+.stats_subsection{
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 75%;
+  margin: 0 2%;
+}
+
+.buttons_container{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 45%;
+  margin: 0 5%;
 }
 
 button{
   margin: 0 1%;
+  padding: 1%;
+}
+
+button:hover{
+  background-color: white;
+  cursor: pointer;
 }
 
 .key_container{
   display: flex;
   width: auto;
   justify-content: space-between;
+  margin: 1%;
 }
 
 .key{
@@ -115,7 +159,7 @@ button{
   width: auto;
 }
 
-.middle{
+.grid_main_section{
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -130,29 +174,23 @@ button{
   margin: 0 5px;
 }
 
-.about{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: lightgray;
-  width: 100%;
-  border-top: solid black 1px;
-}
-
 .about_section{
+  border-top: solid 1px black;
   display: flex;
   flex-wrap: wrap;
   width: 100%;
+  background-color: rgb(211, 176, 116);
 }
 
 .subtitle{
   text-align: center;
-  border: solid black 1px;
   margin-bottom: 1%;
-  background-color: rgba(161, 119, 2, 0.151);
+  background-color: rgb(48, 29, 0);
+  color: white;
 }
 
 .rules{
+  border-top: black solid 1px;
   width: 40%;
   display: flex;
   flex-direction: column;
@@ -165,25 +203,65 @@ button{
   margin: 0;
 }
 
-.others:nth-child(4n), .others:nth-child(4n+1){
-  background-color: silver;
+.rules:nth-child(4n), .rules:nth-child(4n+1){
+  background-color: rgb(179, 151, 108);
 }
 
 @media screen and (max-width: 560px){
+  .grid_main_section{
+    padding-bottom: 3%;
+  }
+
+  .rules{
+    width: 80%;
+    padding:  5% 10%;
+    margin: 0;
+  }
+
+  .rules:nth-child(odd){
+    background-color: rgb(179, 151, 108);
+  }
+
+  .rules:nth-child(even){
+    background-color: rgb(211, 176, 116);
+  }
+
+  .bannerSection{
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
+  .stats{
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+
   .buttons_container{
-    width: 95%;
+    justify-content: space-evenly;
+    margin: 0;
+    padding: 0;
+    width: 100%;
   }
 
   button{
     margin: 0;
   }
 
-  .others:nth-child(odd){
-    background-color: whitesmoke;
+  .about_section{
+    border-top: solid 1px black;
+    flex-direction: column;
   }
 
-  .rules{
-    width: 100%;
+  .subtitle{
+    background-color: none;
+    padding: 0;
+    border: none;
+    color: white;
   }
 
   .hide_when_small{
