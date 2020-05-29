@@ -15,7 +15,7 @@ const AboutPage = () => {
                     <li>Click <button style={{color: "red", border: "red 1px solid"}}>Stop</button> to stop simulating. This button only appears if the simulation <strong>is</strong> running.</li>
                     <li>Click <button>Next Generation</button> to go to the next life-cycle generation.</li>
                     <li>Click <button>Randomize</button> to randomly populate the grid with live cells. Each box has a 30% chance to be alive.</li>
-                    <li className="hide_when_small">Click <button>Load Gun</button> to load a preset configuration known as a the Gosper glider gun.</li>
+                    <li className="hide_when_small">Click <button>Load Gosper Gun</button> to load a preset configuration known as a the Gosper glider gun.</li>
                     <li>Click <button>Reset</button> to reset the grid and the generation. The grid's size is based on your browser's current window size.</li>
                     <li>Click on any box on the grid to toggle it's status.</li>
                 </div>
