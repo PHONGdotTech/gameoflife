@@ -258,10 +258,10 @@ const Main = () =>{
         <div className="main">
             <h1 className="title">Conway's Game of Life</h1>
             <div className="bannerSection">
-                <div className="stats">
+                <div className="stats_container">
                     <div className="stats_subsection" title="The current generation."><h4>Generations:</h4><span className="midSection">{generation}</span></div>
                     <div className="stats_subsection" title="How many cells are currently alive."><h4>Population:</h4><span className="midSection">{popRef.current}</span></div>
-                    <div className="stats_subsection" title="The size of the grid, automatically calculated based on your window size."><h4>Grid size:</h4><span className="midSection">{width} x {height} = {width*height}</span></div>
+                    <div className="stats_subsection hide_when_small" title="The size of the grid, automatically calculated based on your window size."><h4>Grid size:</h4><span className="midSection">{width} x {height} = {width*height}</span></div>
                 </div>
                 <div className="buttons_container">
                     <button 
@@ -276,7 +276,7 @@ const Main = () =>{
                             {color: "green", border: "green double"}
                         }
                     >
-                        {run ? "Stop" : "Start"}
+                        {run ? "Stop Simulation" : "Start Simulation"}
                     </button>
                     <button title="Go to the next generation" onClick={() => nextButton()}>Next Generation</button>
                     <button title="Randomly select the grid's status" onClick={() => seed()}>Randomize</button>
